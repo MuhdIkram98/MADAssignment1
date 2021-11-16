@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
 
-/// This is the main application widget.
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/// This is the stateful widget that the main application instantiates.
+
 class FruitNumberingWidget extends StatefulWidget {
 
   const FruitNumberingWidget({Key? key}) : super(key: key);
