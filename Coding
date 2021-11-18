@@ -1,72 +1,79 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(Assignment1());
+}
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  static const String _title = 'Fruit numbering Function';
-
+class Assignment1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: _title,
-      home: FruitNumberingWidget(),
+    return MaterialApp(
+      home: HomeView(title: 'Assignment 1 : Fruit Numbering'),
     );
   }
 }
 
-
-class FruitNumberingWidget extends StatefulWidget {
-
-  const FruitNumberingWidget({Key? key}) : super(key: key);
+class HomeView extends StatefulWidget {
+  final String title;
+  HomeView({required this.title});
 
   @override
-  State<FruitNumberingWidget> createState() => _FruitNumberingWidget();
+  _HomeViewState createState() => _HomeViewState();
 }
 
-
-class _FruitNumberingWidget extends State<FruitNumberingWidget> {
-
+class _HomeViewState extends State<HomeView> {
   final TextController = TextEditingController();
-  int intValue = 0;
-  var Fruits = ['apple', 'orange', 'rambutan'];
+  int InitialValue = 0;
+  var List = ['apple', 'orange', 'rambutan','Null','Null','Null','Null','Null','Null','Null','Null'];
   String Final = '';
+
   void change() {
+
     setState(() {
-      intValue = int.parse(TextController.text);
-      intValue -=  1;
-      Final = Fruits[intValue];
+      InitialValue = int.parse(TextController.text);
+
+      InitialValue -= 1;
+
+      Final = List[InitialValue];
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: change,
+            child: Icon(Icons.ac_unit),
+          )
+        ],
+      ),
       body: Center(
-        child: TextField(
-          controller: TextController,
-          onSubmitted: (String value) async {
-            await showDialog<void>(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: const Text('This is your answer'),
-                  content: Text('$Final'),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text('OK'),
-                    ),
-                  ],
-                );
-              },
-            );
-          },
+        child: Padding(
+          padding: const EdgeInsets.all(50.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextField(
+                decoration: InputDecoration(
+                  hintText: "Enter a number from 1 to 3",
+                  labelText: "Enter a number only",
+                    labelStyle : TextStyle(color:Colors.black),
+                   border:OutlineInputBorder()),
+                controller: TextController,
+                keyboardType: TextInputType.number,
+              ),
+              SizedBox(height: 20),
+              Text(
+                '$Final',
+              )
+            ],
+          ),
         ),
       ),
     );
